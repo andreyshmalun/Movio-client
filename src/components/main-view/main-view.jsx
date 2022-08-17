@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -43,10 +42,17 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, selectedMovie, user } = this.state;
+    const { movies, selectedMovie, user, register } = this.state;
 
     if (!user)
       return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+
+    if (!register)
+      return (
+        <RegistrationView
+          onRegistration={(register) => this.onRegistration(register)}
+        />
+      );
 
     if (movies.length === 0)
       return <div className="main-view">The list is empty!</div>;
