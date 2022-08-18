@@ -13,6 +13,7 @@ export class MainView extends React.Component {
       movies: [],
       selectedMovie: null,
       user: null,
+      register: null,
     };
   }
 
@@ -41,6 +42,12 @@ export class MainView extends React.Component {
     });
   }
 
+  onRegister(register) {
+    this.setState({
+      register,
+    });
+  }
+
   render() {
     const { movies, selectedMovie, user, register } = this.state;
 
@@ -50,7 +57,7 @@ export class MainView extends React.Component {
     if (!register)
       return (
         <RegistrationView
-          onRegistration={(register) => this.onRegistration(register)}
+          onRegister={(register) => this.onRegister(register)}
         />
       );
 

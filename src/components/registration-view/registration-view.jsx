@@ -9,7 +9,7 @@ export function RegistrationView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username, password, email, birthday);
-    props.onRegister(username);
+    props.onRegister(username, password, email, birthday);
   };
 
   return (
