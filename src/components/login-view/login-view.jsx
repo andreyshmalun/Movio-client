@@ -10,11 +10,6 @@ export function LoginView(props) {
     props.onLoggedIn(username);
   };
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    props.onRegister();
-  };
-
   return (
     <form>
       <label>
@@ -35,9 +30,6 @@ export function LoginView(props) {
       </label>
       <button type="submit" onClick={handleSubmit}>
         Submit
-      </button>
-      <button type="submit" onClick={handleRegister}>
-        Register
       </button>
     </form>
   );
