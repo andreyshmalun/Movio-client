@@ -31563,6 +31563,8 @@ parcelHelpers.export(exports, "RegistrationView", ()=>RegistrationView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _s = $RefreshSig$();
 function RegistrationView(props) {
     _s();
@@ -31573,42 +31575,24 @@ function RegistrationView(props) {
     const validate = ()=>{
         let isReq = true;
         if (!username) {
-            setValues({
-                ...values,
-                usernameErr: "Username Required"
-            });
+            console.log("Username Required");
             isReq = false;
         } else if (username.length < 5) {
-            setValues({
-                ...values,
-                usernameErr: "Username must be 5 characters long"
-            });
+            console.log("Username must be 5 characters long");
             isReq = false;
         }
         if (!password) {
-            setValues({
-                ...values,
-                passwordErr: "Password Required"
-            });
+            console.log("Password Required");
             isReq = false;
         } else if (password.length < 6) {
-            setValues({
-                ...values,
-                passwordErr: "Password must be 6 characters long"
-            });
+            console.log("Password must be 6 characters long");
             isReq = false;
         }
         if (!email) {
-            setValues({
-                ...values,
-                emailErr: "Email Required"
-            });
+            console.log("Email Required");
             isReq = false;
         } else if (email.indexOf("@") === -1) {
-            setValues({
-                ...values,
-                emailErr: "Email is invalid"
-            });
+            console.log("Email is invalid");
             isReq = false;
         }
         return isReq;
@@ -31616,7 +31600,7 @@ function RegistrationView(props) {
     const handleSubmit = (e)=>{
         e.preventDefault();
         const isReq = validate();
-        if (isReq) axios.post("https://movio-app.herokuapp.com/users", {
+        if (isReq) (0, _axiosDefault.default).post("https://movio-app.herokuapp.com/users", {
             Username: username,
             Password: password,
             Email: email,
@@ -31639,13 +31623,13 @@ function RegistrationView(props) {
                         onChange: (e)=>setUsername(e.target.value)
                     }, void 0, false, {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 66,
+                        lineNumber: 61,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/registration-view/registration-view.jsx",
-                lineNumber: 64,
+                lineNumber: 59,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -31657,13 +31641,13 @@ function RegistrationView(props) {
                         onChange: (e)=>setPassword(e.target.value)
                     }, void 0, false, {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 74,
+                        lineNumber: 69,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/registration-view/registration-view.jsx",
-                lineNumber: 72,
+                lineNumber: 67,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -31675,13 +31659,13 @@ function RegistrationView(props) {
                         onChange: (e)=>setEmail(e.target.value)
                     }, void 0, false, {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 82,
+                        lineNumber: 77,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/registration-view/registration-view.jsx",
-                lineNumber: 80,
+                lineNumber: 75,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -31693,13 +31677,13 @@ function RegistrationView(props) {
                         onChange: (e)=>setBirthday(e.target.value)
                     }, void 0, false, {
                         fileName: "src/components/registration-view/registration-view.jsx",
-                        lineNumber: 90,
+                        lineNumber: 85,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/registration-view/registration-view.jsx",
-                lineNumber: 88,
+                lineNumber: 83,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -31708,13 +31692,13 @@ function RegistrationView(props) {
                 children: "Submit"
             }, void 0, false, {
                 fileName: "src/components/registration-view/registration-view.jsx",
-                lineNumber: 96,
+                lineNumber: 91,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/registration-view/registration-view.jsx",
-        lineNumber: 63,
+        lineNumber: 58,
         columnNumber: 5
     }, this);
 }
@@ -31728,6 +31712,6 @@ $RefreshReg$(_c, "RegistrationView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lJZlQ":[function() {},{}]},["1xC6H","jVvJi","d8Dch"], "d8Dch", "parcelRequire43d2")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","axios":"jo6P5"}],"lJZlQ":[function() {},{}]},["1xC6H","jVvJi","d8Dch"], "d8Dch", "parcelRequire43d2")
 
 //# sourceMappingURL=index.b4b6dfad.js.map

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
@@ -9,30 +10,24 @@ export function RegistrationView(props) {
   const validate = () => {
     let isReq = true;
     if (!username) {
-      setValues({ ...values, usernameErr: 'Username Required' });
+      console.log('Username Required');
       isReq = false;
     } else if (username.length < 5) {
-      setValues({
-        ...values,
-        usernameErr: 'Username must be 5 characters long',
-      });
+      console.log('Username must be 5 characters long');
       isReq = false;
     }
     if (!password) {
-      setValues({ ...values, passwordErr: 'Password Required' });
+      console.log('Password Required');
       isReq = false;
     } else if (password.length < 6) {
-      setValues({
-        ...values,
-        passwordErr: 'Password must be 6 characters long',
-      });
+      console.log('Password must be 6 characters long');
       isReq = false;
     }
     if (!email) {
-      setValues({ ...values, emailErr: 'Email Required' });
+      console.log('Email Required');
       isReq = false;
     } else if (email.indexOf('@') === -1) {
-      setValues({ ...values, emailErr: 'Email is invalid' });
+      console.log('Email is invalid');
       isReq = false;
     }
     return isReq;
