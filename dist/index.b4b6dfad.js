@@ -31461,41 +31461,36 @@ function LoginView(props) {
     _s();
     const [username, setUsername] = (0, _react.useState)("");
     const [password, setPassword] = (0, _react.useState)("");
-    // const validation = () => {
-    //   let isReq = true;
-    //   if (!username) {
-    //     let setUsernameError = console.log('Username required.');
-    //     isReq = false;
-    //   }
-    //   if (!password) {
-    //     let setPasswordError = console.log('Password required.');
-    //     isReq = false;
-    //   }
-    //   return isReq;
-    // };
-    // const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   const isReq = validation();
-    //   if (isReq) {
-    //     axios
-    //       .post('https://movio-app.herokuapp.com/login', {
-    //         Username: username,
-    //         Password: password,
-    //       })
-    //       .then((response) => {
-    //         const data = response.data;
-    //         props.onLoggedIn(data);
-    //       })
-    //       .catch((e) => {
-    //         console.log('no such user');
-    //       });
-    //   }
-    // };
+    const validation = ()=>{
+        let isReq = true;
+        if (!username) {
+            let setUsernameError = console.log("Username required.");
+            isReq = false;
+        }
+        if (!password) {
+            let setPasswordError = console.log("Password required.");
+            isReq = false;
+        }
+        return isReq;
+    };
     const handleSubmit = (e)=>{
         e.preventDefault();
-        console.log(username, password);
-        props.onLoggedIn(username);
+        const isReq = validation();
+        if (isReq) (0, _axiosDefault.default).post("https://movio-app.herokuapp.com/login", {
+            Username: username,
+            Password: password
+        }).then((response)=>{
+            const data = response.data;
+            props.onLoggedIn(data);
+        }).catch((e)=>{
+            console.log("no such user");
+        });
     };
+    // const handleSubmit = (e) => {
+    //   e.preventDefault();
+    //   console.log(username, password);
+    //   props.onLoggedIn(username);
+    // };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
