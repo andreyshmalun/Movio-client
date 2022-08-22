@@ -31461,30 +31461,40 @@ function LoginView(props) {
     _s();
     const [username, setUsername] = (0, _react.useState)("");
     const [password, setPassword] = (0, _react.useState)("");
-    const validation = ()=>{
-        let isReq = true;
-        if (!username) {
-            let setUsernameError = console.log("Username required.");
-            isReq = false;
-        }
-        if (!password) {
-            let setPasswordError = console.log("Password required.");
-            isReq = false;
-        }
-        return isReq;
-    };
+    // const validation = () => {
+    //   let isReq = true;
+    //   if (!username) {
+    //     let setUsernameError = console.log('Username required.');
+    //     isReq = false;
+    //   }
+    //   if (!password) {
+    //     let setPasswordError = console.log('Password required.');
+    //     isReq = false;
+    //   }
+    //   return isReq;
+    // };
+    // const handleSubmit = (e) => {
+    //   e.preventDefault();
+    //   const isReq = validation();
+    //   if (isReq) {
+    //     axios
+    //       .post('https://movio-app.herokuapp.com/login', {
+    //         Username: username,
+    //         Password: password,
+    //       })
+    //       .then((response) => {
+    //         const data = response.data;
+    //         props.onLoggedIn(data);
+    //       })
+    //       .catch((e) => {
+    //         console.log('no such user');
+    //       });
+    //   }
+    // };
     const handleSubmit = (e)=>{
         e.preventDefault();
-        const isReq = validation();
-        if (isReq) (0, _axiosDefault.default).post("https://movio-app.herokuapp.com/login", {
-            Username: username,
-            Password: password
-        }).then((response)=>{
-            const data = response.data;
-            props.onLoggedIn(data);
-        }).catch((e)=>{
-            console.log("no such user");
-        });
+        console.log(username, password);
+        props.onLoggedIn(username);
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
         children: [
@@ -31497,13 +31507,13 @@ function LoginView(props) {
                         onChange: (e)=>setUsername(e.target.value)
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 44,
+                        lineNumber: 50,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 42,
+                lineNumber: 48,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -31515,13 +31525,13 @@ function LoginView(props) {
                         onChange: (e)=>setPassword(e.target.value)
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 52,
+                        lineNumber: 58,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 50,
+                lineNumber: 56,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -31530,13 +31540,13 @@ function LoginView(props) {
                 children: "Submit"
             }, void 0, false, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 58,
+                lineNumber: 64,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/login-view/login-view.jsx",
-        lineNumber: 41,
+        lineNumber: 47,
         columnNumber: 5
     }, this);
 }
