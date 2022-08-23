@@ -12,8 +12,8 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       selectedMovie: null,
-      user: null,
-      register: null,
+      currentUser: null,
+      step: 'login', // can be   login / register / app
     };
   }
 
@@ -38,28 +38,52 @@ export class MainView extends React.Component {
 
   onLoggedIn(user) {
     this.setState({
-      user,
+      currentUser: user,
+      step: 'app',
     });
   }
 
-  onRegister(register) {
+  toRegister() {
     this.setState({
-      register,
+      step: 'register',
+    });
+  }
+
+  toLogin() {
+    this.setState({
+      step: 'login',
+    });
+  }
+
+  onRegister(newUser) {
+    this.setState({
+      step: 'app',
+      currentUser: newUser,
     });
   }
 
   render() {
-    const { movies, selectedMovie, user, register } = this.state;
+    const { movies, selectedMovie, currentUser, step } = this.state;
 
-    if (!user)
-      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
+    if (step === 'login')
+      return (
+        <LoginView
+          onLoggedIn={(user) => this.onLoggedIn(user)}
+          toRegister={() => this.toRegister()}
+        />
+      );
 
-    if (!register)
+    if (step === 'register')
       return (
         <RegistrationView
           onRegister={(register) => this.onRegister(register)}
+          toLogin={() => this.toLogin}
         />
       );
+
+    if (!currentUser) {
+      return null;
+    }
 
     if (movies.length === 0)
       return <div className="main-view">The list is empty!</div>;
