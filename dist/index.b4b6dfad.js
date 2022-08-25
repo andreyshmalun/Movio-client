@@ -27137,7 +27137,7 @@ class MainView extends (0, _reactDefault.default).Component {
         }, this);
         if (step === "register") return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _registrationView.RegistrationView), {
             onRegister: (register)=>this.onRegister(register),
-            toLogin: ()=>this.toLogin
+            toLogin: ()=>this.toLogin()
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
             lineNumber: 78,
