@@ -60,7 +60,7 @@ export function LoginView(props) {
             />
           </Form.Group>
           <Button variant="primary" type="submit" onClick={handleSubmit}>
-            Submit
+            Login
           </Button>
           <Button variant="primary" type="submit" onClick={props.toRegister}>
             To register

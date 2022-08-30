@@ -32883,7 +32883,7 @@ function LoginView(props) {
                         variant: "primary",
                         type: "submit",
                         onClick: handleSubmit,
-                        children: "Submit"
+                        children: "Login"
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
                         lineNumber: 62,
