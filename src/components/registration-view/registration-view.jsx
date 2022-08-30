@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
@@ -55,55 +60,48 @@ export function RegistrationView(props) {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-      <div>
-        <label>
-          Username:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Email:
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Birthday:
-          <input
-            type="date"
-            value={birthday}
-            onChange={(e) => setBirthday(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <br />
-        <button type="submit" onClick={handleSubmit}>
-          Register
-        </button>
-        <button onClick={props.toLogin}>To Login</button>
-      </div>
-    </div>
+    <Row className="login-view justify-content-md-center">
+      <Col sm="auto">
+        <Form>
+          <Form.Group controlId="formUsername">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formEmail">
+            <Form.Label>Email:</Form.Label>
+            <Form.Control
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formBirthday">
+            <Form.Label>Birthday:</Form.Label>
+            <Form.Control
+              type="date"
+              onChange={(e) => setBirthday(e.target.value)}
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
+            Submit
+          </Button>
+          <Button variant="primary" type="submit" onClick={props.toLogin}>
+            To login
+          </Button>
+        </Form>
+      </Col>
+    </Row>
   );
 }

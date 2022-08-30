@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -8,11 +12,11 @@ export function LoginView(props) {
   const validation = () => {
     let isReq = true;
     if (!username) {
-      let setUsernameError = console.log('Username required.');
+      console.log('Username required.');
       isReq = false;
     }
     if (!password) {
-      let setPasswordError = console.log('Password required.');
+      console.log('Password required.');
       isReq = false;
     }
     return isReq;
@@ -37,42 +41,32 @@ export function LoginView(props) {
     }
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(username, password);
-  //   props.onLoggedIn(username);
-  // };
-
   return (
-    <div>
-      <h1>Login</h1>
-      <div>
-        <label>
-          Username:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-      </div>
-      <div>
-        <br />
-        <button type="submit" onClick={handleSubmit}>
-          Login
-        </button>
-        <button onClick={props.toRegister}>To Register</button>
-      </div>
-    </div>
+    <Row className="login-view justify-content-md-center">
+      <Col sm="auto">
+        <Form>
+          <Form.Group controlId="formUsername">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group controlId="formPassword">
+            <Form.Label>Password:</Form.Label>
+            <Form.Control
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit" onClick={handleSubmit}>
+            Submit
+          </Button>
+          <Button variant="primary" type="submit" onClick={props.toRegister}>
+            To register
+          </Button>
+        </Form>
+      </Col>
+    </Row>
   );
 }
