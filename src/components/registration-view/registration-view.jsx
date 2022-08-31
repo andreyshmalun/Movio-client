@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Button, Form, Col, Row } from 'react-bootstrap';
 
 export function RegistrationView(props) {
   const [username, setUsername] = useState('');
@@ -63,41 +59,49 @@ export function RegistrationView(props) {
     <Row className="login-view justify-content-md-center">
       <Col sm="auto">
         <Form>
-          <Form.Group controlId="formUsername">
+          <Form.Group className="mb-3" controlId="formUsername">
             <Form.Label>Username:</Form.Label>
             <Form.Control
               type="text"
               onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter a username"
             />
           </Form.Group>
 
-          <Form.Group controlId="formPassword">
+          <Form.Group className="mb-3" controlId="formPassword">
             <Form.Label>Password:</Form.Label>
             <Form.Control
               type="password"
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter a password"
             />
           </Form.Group>
 
-          <Form.Group controlId="formEmail">
+          <Form.Group className="mb-3" controlId="formEmail">
             <Form.Label>Email:</Form.Label>
             <Form.Control
               type="email"
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email address"
             />
           </Form.Group>
 
-          <Form.Group controlId="formBirthday">
+          <Form.Group className="mb-3" controlId="formBirthday">
             <Form.Label>Birthday:</Form.Label>
             <Form.Control
               type="date"
               onChange={(e) => setBirthday(e.target.value)}
             />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
+          <Button
+            className="me-md-3"
+            variant="primary"
+            type="submit"
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
-          <Button variant="primary" type="submit" onClick={props.toLogin}>
+          <Button variant="secondary" type="submit" onClick={props.toLogin}>
             To login
           </Button>
         </Form>

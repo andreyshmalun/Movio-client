@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Button, Form, Col, Row } from 'react-bootstrap';
 
 export function LoginView(props) {
   const [username, setUsername] = useState('');
@@ -48,21 +45,30 @@ export function LoginView(props) {
           <Form.Group controlId="formUsername">
             <Form.Label>Username:</Form.Label>
             <Form.Control
+              className="mb-3"
               type="text"
               onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter a username"
             />
           </Form.Group>
           <Form.Group controlId="formPassword">
             <Form.Label>Password:</Form.Label>
             <Form.Control
+              className="mb-3"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
             />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
+          <Button
+            className="me-3"
+            variant="primary"
+            type="submit"
+            onClick={handleSubmit}
+          >
             Login
           </Button>
-          <Button variant="primary" type="submit" onClick={props.toRegister}>
+          <Button variant="secondary" type="submit" onClick={props.toRegister}>
             To register
           </Button>
         </Form>

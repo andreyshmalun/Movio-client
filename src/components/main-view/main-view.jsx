@@ -6,8 +6,7 @@ import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Col, Row } from 'react-bootstrap';
 
 export class MainView extends React.Component {
   constructor() {
@@ -104,7 +103,7 @@ export class MainView extends React.Component {
           </Col>
         ) : (
           movies.map((movie) => (
-            <Col md={3}>
+            <Col lg={3} md={4} sm={6}>
               <MovieCard
                 key={movie._id}
                 movie={movie}

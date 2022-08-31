@@ -1,9 +1,9 @@
 .movieDescription {
-  display: -webkit-box;
   -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
 }
 
 .movieImage {
@@ -11,3 +11,9 @@
   height: 35vw;
   object-fit: cover;
 }
+
+.movio {
+  color: #4682b4;
+}
+
+/*# sourceMappingURL=index.e3f97e84.css.map */
