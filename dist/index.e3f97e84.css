@@ -6,12 +6,6 @@
   overflow: hidden;
 }
 
-.movieImage {
-  width: 100%;
-  height: 35vw;
-  object-fit: cover;
-}
-
 .movio {
   color: #4682b4;
 }

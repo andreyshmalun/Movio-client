@@ -5,6 +5,7 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import Navbar from '../navbar/navbar';
 
 import { Col, Row } from 'react-bootstrap';
 
@@ -14,19 +15,32 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       selectedMovie: null,
-      currentUser: null,
+      user: null,
       step: 'login', // can be   login / register / app
     };
   }
 
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
-    if (accessToken !== null) {
+    let user = localStorage.getItem('user');
+    if (accessToken && user) {
       this.setState({
-        user: localStorage.getItem('user'),
+        step: 'app',
+        user,
       });
       this.getMovies(accessToken);
+    } else {
+      this.setState({
+        step: 'login',
+      });
     }
+
+    // if (!accessToken) {
+    //   this.setState({
+    //     user: localStorage.getItem('user'),
+    //   });
+    //   this.getMovies(accessToken);
+    // }
   }
 
   setSelectedMovie(newSelectedMovie) {
@@ -45,13 +59,22 @@ export class MainView extends React.Component {
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
-      currentUser: authData.user.Username,
+      user: authData.user.Username,
       step: 'app',
     });
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
+  }
+
+  onLoggedOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.setState({
+      user: null,
+      step: 'login',
+    });
   }
 
   getMovies(token) {
@@ -85,17 +108,16 @@ export class MainView extends React.Component {
   onRegister(newUser) {
     this.setState({
       step: 'app',
-      currentUser: newUser,
+      user: newUser,
     });
   }
 
   render() {
-    const { movies, selectedMovie, currentUser, step } = this.state;
-
+    const { movies, selectedMovie, user, step } = this.state;
     if (step === 'login')
       return (
         <LoginView
-          onLoggedIn={(user) => this.onLoggedIn(user)}
+          onLoggedIn={(authData) => this.onLoggedIn(authData)}
           toRegister={() => this.toRegister()}
         />
       );
@@ -108,7 +130,7 @@ export class MainView extends React.Component {
         />
       );
 
-    if (!currentUser) {
+    if (!user) {
       return null;
     }
 
@@ -116,30 +138,33 @@ export class MainView extends React.Component {
       return <div className="main-view">The list is empty!</div>;
 
     return (
-      <Row className="main-view justify-content-md-center">
-        {selectedMovie ? (
-          <Col md={8}>
-            <MovieView
-              movie={selectedMovie}
-              onBackClick={(newSelectedMovie) => {
-                this.setSelectedMovie(newSelectedMovie);
-              }}
-            />
-          </Col>
-        ) : (
-          movies.map((movie) => (
-            <Col lg={3} md={4} sm={6}>
-              <MovieCard
-                key={movie._id}
-                movie={movie}
-                onMovieClick={(movie) => {
-                  this.setSelectedMovie(movie);
+      <div>
+        <Navbar onLoggedOut={() => this.onLoggedOut()} />
+        <Row className="main-view">
+          {selectedMovie ? (
+            <Col md={8}>
+              <MovieView
+                movie={selectedMovie}
+                onBackClick={(newSelectedMovie) => {
+                  this.setSelectedMovie(newSelectedMovie);
                 }}
               />
             </Col>
-          ))
-        )}
-      </Row>
+          ) : (
+            movies.map((movie) => (
+              <Col key={movie._id} lg={3} md={4} sm={5}>
+                <MovieCard
+                  key={movie._id}
+                  movie={movie}
+                  onMovieClick={(movie) => {
+                    this.setSelectedMovie(movie);
+                  }}
+                />
+              </Col>
+            ))
+          )}
+        </Row>
+      </div>
     );
   }
 }
