@@ -1,5 +1,5 @@
 .movieDescription {
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 3;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
   display: -webkit-box;
