@@ -9,7 +9,7 @@ export class MovieCard extends React.Component {
     const { movie, onMovieClick } = this.props;
 
     return (
-      <Card className="movieCard m-3">
+      <Card className="movieCard m-2">
         <Card.Img
           className="movieImage"
           variant="top"

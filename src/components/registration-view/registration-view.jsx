@@ -8,27 +8,31 @@ export function RegistrationView(props) {
   const [email, setEmail] = useState('');
   const [birthday, setBirthday] = useState('');
 
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
+  const [emailErr, setEmailErr] = useState('');
+
   const validate = () => {
     let isReq = true;
     if (!username) {
-      console.log('Username Required');
+      setUsernameErr('Username required.');
       isReq = false;
-    } else if (username.length < 5) {
-      console.log('Username must be 5 characters long');
+    } else if (username.length < 2) {
+      setUsernameErr('Username must be 2 characters long');
       isReq = false;
     }
     if (!password) {
-      console.log('Password Required');
+      setPasswordErr('Password required.');
       isReq = false;
     } else if (password.length < 6) {
-      console.log('Password must be 6 characters long');
+      setPasswordErr('Password must be 6 characters long');
       isReq = false;
     }
     if (!email) {
-      console.log('Email Required');
+      setEmailErr('Email Required');
       isReq = false;
     } else if (email.indexOf('@') === -1) {
-      console.log('Email is invalid');
+      setEmailErr('Email is invalid');
       isReq = false;
     }
     return isReq;
@@ -63,27 +67,33 @@ export function RegistrationView(props) {
             <Form.Label>Username:</Form.Label>
             <Form.Control
               type="text"
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter a username"
             />
+            {usernameErr && <p>{usernameErr}</p>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formPassword">
             <Form.Label>Password:</Form.Label>
             <Form.Control
               type="password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter a password"
             />
+            {passwordErr && <p>{passwordErr}</p>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formEmail">
             <Form.Label>Email:</Form.Label>
             <Form.Control
               type="email"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email address"
             />
+            {emailErr && <p>{emailErr}</p>}
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBirthday">

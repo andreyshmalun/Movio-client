@@ -4,19 +4,17 @@ import Navbar from 'react-bootstrap/Navbar';
 
 function Header(props) {
   return (
-    <Container>
-      <Navbar expand="lg" variant="light" bg="light">
-        <Container>
-          <Button
-            onClick={() => {
-              props.onLoggedOut();
-            }}
-          >
-            LogOut
-          </Button>
-        </Container>
-      </Navbar>
-    </Container>
+    <Navbar expand="lg" variant="light" bg="light" fixed="top">
+      <Container>
+        <Button
+          onClick={() => {
+            props.onLoggedOut();
+          }}
+        >
+          Log Out
+        </Button>
+      </Container>
+    </Navbar>
   );
 }
 

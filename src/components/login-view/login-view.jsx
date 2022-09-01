@@ -5,15 +5,23 @@ import { Button, Form, Col, Row } from 'react-bootstrap';
 export function LoginView(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [usernameErr, setUsernameErr] = useState('');
+  const [passwordErr, setPasswordErr] = useState('');
 
   const validation = () => {
     let isReq = true;
     if (!username) {
-      console.log('Username required.');
+      setUsernameErr('Username required.');
+      isReq = false;
+    } else if (username.length < 2) {
+      setUsernameErr('Username must be 2 characters long');
       isReq = false;
     }
     if (!password) {
-      console.log('Password required.');
+      setPasswordErr('Password required.');
+      isReq = false;
+    } else if (password.length < 6) {
+      setPasswordErr('Password must be 6 characters long');
       isReq = false;
     }
     return isReq;
@@ -47,18 +55,22 @@ export function LoginView(props) {
             <Form.Control
               className="mb-3"
               type="text"
-              onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter a username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
+            {usernameErr && <p>{usernameErr}</p>}
           </Form.Group>
           <Form.Group controlId="formPassword">
             <Form.Label>Password:</Form.Label>
             <Form.Control
               className="mb-3"
               type="password"
+              placeholder="Password"
+              value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
             />
+            {passwordErr && <p>{passwordErr}</p>}
           </Form.Group>
           <Button
             className="me-3"

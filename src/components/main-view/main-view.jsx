@@ -49,13 +49,6 @@ export class MainView extends React.Component {
     });
   }
 
-  // onLoggedIn(user) {
-  //   this.setState({
-  //     currentUser: user,
-  //     step: 'app',
-  //   });
-  // }
-
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
@@ -140,7 +133,7 @@ export class MainView extends React.Component {
     return (
       <div>
         <Navbar onLoggedOut={() => this.onLoggedOut()} />
-        <Row className="main-view">
+        <Row className="main-view mt-5">
           {selectedMovie ? (
             <Col md={8}>
               <MovieView
