@@ -9,13 +9,23 @@ export class MovieCard extends React.Component {
     const { movie, onMovieClick } = this.props;
 
     return (
-      <Card className="movieCard m-2">
-        <Card.Img
-          className="movieImage"
-          variant="top"
-          src={movie.ImagePath}
-          style={{ width: '100%', height: '25%', objectFit: 'cover' }}
-        />
+      <Card
+        className="movieCard m-2"
+        style={{ maxWidth: '100%', height: '400px', textAlign: 'center' }}
+      >
+        <div style={{ textAlign: 'center' }}>
+          <Card.Img
+            className="movieImage mt-3"
+            variant="top"
+            src={movie.ImagePath}
+            style={{
+              width: '100px',
+              height: '150px',
+              objectFit: 'cover',
+            }}
+          />
+        </div>
+
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text className="movieDescription">

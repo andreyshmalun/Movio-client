@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 function Header(props) {
   return (
     <Navbar expand="lg" variant="light" bg="light" fixed="top">
-      <Container>
+      <Container className="justify-content-end">
         <Button
           onClick={() => {
             props.onLoggedOut();
