@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import { MainView } from './components/main-view/main-view';
 
 // Import statement to indicate that you need to bundle `./index.scss`
@@ -14,6 +14,6 @@ class MovioApplication extends React.Component {
 
 // Finds the root of your app
 const container = document.getElementsByClassName('app-container')[0];
-
+const root = ReactDOM.createRoot(container);
 // Tells React to render your app in the root DOM element
-ReactDOM.render(React.createElement(MovioApplication), container);
+root.render(React.createElement(MovioApplication));

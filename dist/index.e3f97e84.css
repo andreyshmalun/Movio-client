@@ -6,6 +6,10 @@
   overflow: hidden;
 }
 
+.navbar-logo:first-letter {
+  color: #eb4747;
+}
+
 .movio {
   color: #4682b4;
 }

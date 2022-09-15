@@ -47,7 +47,7 @@ export function LoginView(props) {
   };
 
   return (
-    <Row className="login-view justify-content-md-center">
+    <Row className="login-view justify-content-md-center mt-5">
       <Col sm="auto">
         <Form>
           <Form.Group controlId="formUsername">
@@ -79,9 +79,6 @@ export function LoginView(props) {
             onClick={handleSubmit}
           >
             Login
-          </Button>
-          <Button variant="secondary" type="submit" onClick={props.toRegister}>
-            To register
           </Button>
         </Form>
       </Col>

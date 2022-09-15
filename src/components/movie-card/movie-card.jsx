@@ -1,12 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import axios from 'axios';
 import { Button, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import './movie-card.scss';
 
 export class MovieCard extends React.Component {
+  // addMovieToFav = () => {
+  //   const Username = localStorage.getItem('user');
+  //   const token = localStorage.getItem('token');
+  //   axios
+  //     .post(
+  //       `https://movio-app.herokuapp.com/users/${Username}/movies/${movie._id}`,
+  //       { FavoriteMovies: response.data.FavoriteMovies },
+  //       {
+  //         headers: { Authorization: `Bearer ${token}` },
+  //       }
+  //     )
+  //     .then((response) => {
+  //       const updatedUser = response.data;
+  //       console.log('Movie added to fav list');
+  //       localStorage.setItem('user', JSON.stringify(updatedUser));
+  //       window.location.reload();
+  //     })
+  //     .catch((error) => {
+  //       console.log('Adding a movie to user list failed.', error);
+  //     });
+  // };
+
   render() {
-    const { movie, onMovieClick } = this.props;
+    const { movie } = this.props;
 
     return (
       <Card
@@ -31,8 +55,20 @@ export class MovieCard extends React.Component {
           <Card.Text className="movieDescription">
             {movie.Description}
           </Card.Text>
-          <Button onClick={() => onMovieClick(movie)} variant="link">
-            Open
+          <Link to={`/movies/${movie._id}`}>
+            <Button variant="outline-dark" className="m-3">
+              See more
+            </Button>
+          </Link>
+          <Button
+            variant="outline-danger"
+            // onClick={() => this.addMovieToFav()}
+            data-toggle="tooltip"
+            data-placement="center"
+            title="Favourite a movie"
+            className="pl-5"
+          >
+            ♥
           </Button>
         </Card.Body>
       </Card>
@@ -55,5 +91,5 @@ MovieCard.propTypes = {
     }),
     ImagePath: PropTypes.string.isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
+  onMovieClick: PropTypes.func,
 };

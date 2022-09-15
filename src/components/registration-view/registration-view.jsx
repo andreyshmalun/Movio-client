@@ -52,6 +52,7 @@ export function RegistrationView(props) {
         .then((response) => {
           const data = response.data;
           props.onRegister(data);
+          window.open('/', '_self');
         })
         .catch((e) => {
           console.error('unable to register');
@@ -60,7 +61,7 @@ export function RegistrationView(props) {
   };
 
   return (
-    <Row className="login-view justify-content-md-center">
+    <Row className="login-view justify-content-md-center mt-5">
       <Col sm="auto">
         <Form>
           <Form.Group className="mb-3" controlId="formUsername">
@@ -110,9 +111,6 @@ export function RegistrationView(props) {
             onClick={handleSubmit}
           >
             Submit
-          </Button>
-          <Button variant="secondary" type="submit" onClick={props.toLogin}>
-            To login
           </Button>
         </Form>
       </Col>
