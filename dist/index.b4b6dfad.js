@@ -47231,7 +47231,7 @@ const Menubar = ({ user  })=>{
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Brand, {
-                    className: "navbar-logo",
+                    className: "navbar-logo m-1",
                     href: "/",
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                         children: "Movio"
@@ -47261,7 +47261,7 @@ const Menubar = ({ user  })=>{
                             children: [
                                 " ",
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
-                                    className: "nav-link mr-2",
+                                    className: "nav-link m-1",
                                     to: `/users/${user}`,
                                     children: "Profile"
                                 }, void 0, false, {
@@ -47270,7 +47270,7 @@ const Menubar = ({ user  })=>{
                                     columnNumber: 17
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                    className: "nav-link",
+                                    className: "nav-link m-1",
                                     onClick: logOut,
                                     children: "Log Out"
                                 }, void 0, false, {

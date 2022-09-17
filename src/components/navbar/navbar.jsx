@@ -80,7 +80,7 @@ export const Menubar = ({ user }) => {
       variant="dark"
     >
       <Container>
-        <Navbar.Brand className="navbar-logo" href="/">
+        <Navbar.Brand className="navbar-logo m-1" href="/">
           <h3>Movio</h3>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -92,10 +92,10 @@ export const Menubar = ({ user }) => {
             {getToken() ? (
               <>
                 {' '}
-                <Link className="nav-link mr-2" to={`/users/${user}`}>
+                <Link className="nav-link m-1" to={`/users/${user}`}>
                   Profile
                 </Link>
-                <p className="nav-link" onClick={logOut}>
+                <p className="nav-link m-1" onClick={logOut}>
                   Log Out
                 </p>
               </>
