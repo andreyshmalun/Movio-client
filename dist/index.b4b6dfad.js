@@ -47156,6 +47156,58 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Menubar", ()=>Menubar);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
+// import React from 'react';
+// import { Navbar, Container, Nav } from 'react-bootstrap';
+// import './navbar.scss';
+// export function Menubar({ user }) {
+//   onLoggedOut = () => {
+//     localStorage.clear();
+//     window.open('/', '_self');
+//   };
+//   const isAuth = () => {
+//     if (typeof window == 'undefined') {
+//       return false;
+//     }
+//     if (localStorage.getItem('token')) {
+//       return localStorage.getItem('token');
+//     } else {
+//       return false;
+//     }
+//   };
+//   return (
+// <Navbar
+//   className="main-nav"
+//   sticky="top"
+//   bg="dark"
+//   expand="lg"
+//   variant="dark"
+// >
+//       <Container className="container-fluid">
+// <Navbar.Brand className="navbar-logo" href="/">
+//   <h3>Movio</h3>
+// </Navbar.Brand>
+//         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+//         <Navbar.Collapse id="responsive-navbar-nav">
+//           <Nav className="ml-auto">
+//             {isAuth() && <Nav.Link href={`/users/${user}`}>Profile</Nav.Link>}
+//             {isAuth() && (
+//               <Nav.Link
+//                 variant="dark"
+//                 onClick={() => {
+//                   this.onLoggedOut();
+//                 }}
+//               >
+//                 Log Out
+//               </Nav.Link>
+//             )}
+//             {!isAuth() && <Nav.Link href="/">Sign-in</Nav.Link>}
+//             {!isAuth() && <Nav.Link href="/register">Sign-up</Nav.Link>}
+//           </Nav>
+//         </Navbar.Collapse>
+//       </Container>
+//     </Navbar>
+//   );
+// }
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactBootstrap = require("react-bootstrap");
@@ -47185,19 +47237,19 @@ const Menubar = ({ user  })=>{
                         children: "Movio"
                     }, void 0, false, {
                         fileName: "src/components/navbar/navbar.jsx",
-                        lineNumber: 27,
+                        lineNumber: 84,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/navbar/navbar.jsx",
-                    lineNumber: 26,
+                    lineNumber: 83,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Toggle, {
                     "aria-controls": "responsive-navbar-nav"
                 }, void 0, false, {
                     fileName: "src/components/navbar/navbar.jsx",
-                    lineNumber: 29,
+                    lineNumber: 86,
                     columnNumber: 9
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Navbar).Collapse, {
@@ -47214,7 +47266,7 @@ const Menubar = ({ user  })=>{
                                     children: "Profile"
                                 }, void 0, false, {
                                     fileName: "src/components/navbar/navbar.jsx",
-                                    lineNumber: 38,
+                                    lineNumber: 95,
                                     columnNumber: 17
                                 }, undefined),
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -47223,7 +47275,7 @@ const Menubar = ({ user  })=>{
                                     children: "Log Out"
                                 }, void 0, false, {
                                     fileName: "src/components/navbar/navbar.jsx",
-                                    lineNumber: 41,
+                                    lineNumber: 98,
                                     columnNumber: 17
                                 }, undefined)
                             ]
@@ -47232,34 +47284,43 @@ const Menubar = ({ user  })=>{
                                 " ",
                                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
                                     className: "nav-link",
+                                    to: "/",
+                                    children: "Sign In"
+                                }, void 0, false, {
+                                    fileName: "src/components/navbar/navbar.jsx",
+                                    lineNumber: 105,
+                                    columnNumber: 17
+                                }, undefined),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
+                                    className: "nav-link",
                                     to: "/register",
                                     children: "Sign Up"
                                 }, void 0, false, {
                                     fileName: "src/components/navbar/navbar.jsx",
-                                    lineNumber: 48,
+                                    lineNumber: 108,
                                     columnNumber: 17
                                 }, undefined)
                             ]
                         }, void 0, true)
                     }, void 0, false, {
                         fileName: "src/components/navbar/navbar.jsx",
-                        lineNumber: 34,
+                        lineNumber: 91,
                         columnNumber: 11
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/navbar/navbar.jsx",
-                    lineNumber: 30,
+                    lineNumber: 87,
                     columnNumber: 9
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/navbar/navbar.jsx",
-            lineNumber: 25,
+            lineNumber: 82,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/navbar/navbar.jsx",
-        lineNumber: 18,
+        lineNumber: 75,
         columnNumber: 5
     }, undefined);
 };
