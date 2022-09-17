@@ -26,6 +26,7 @@ export class ProfileView extends React.Component {
     this.getUser(accessToken);
   }
 
+  //Deleting movie from the favorite list
   onRemoveFavorite = (e, movie) => {
     const Username = localStorage.getItem('user');
     console.log(Username);
