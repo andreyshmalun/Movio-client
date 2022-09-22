@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -8,7 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-
+import { Figure } from 'react-bootstrap';
 export class ProfileView extends React.Component {
   constructor() {
     super();
@@ -24,28 +25,8 @@ export class ProfileView extends React.Component {
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
     this.getUser(accessToken);
+    this.getMovies(accessToken);
   }
-
-  //Deleting movie from the favorite list
-  onRemoveFavorite = (e, movie) => {
-    const Username = localStorage.getItem('user');
-    console.log(Username);
-    const token = localStorage.getItem('token');
-    console.log(this.props);
-    axios
-      .delete(
-        `https://movio-app.herokuapp.com/users/${Username}/movies/${movie._id}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-      .then((response) => {
-        console.log(response);
-        alert('Movie was removed from favorites.');
-        this.componentDidMount();
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
 
   onLoggedOut() {
     localStorage.removeItem('token');
@@ -77,6 +58,22 @@ export class ProfileView extends React.Component {
         console.log(error);
       });
   };
+
+  getMovies(token) {
+    axios
+      .get('https://movio-app.herokuapp.com/movies', {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   editUser = (e) => {
     const Username = localStorage.getItem('user');
@@ -131,6 +128,24 @@ export class ProfileView extends React.Component {
       });
   }
 
+  //DELETE MOVIE FROM FAVORITE LIST
+  RemoveFavorite = (movie) => {
+    const Username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios
+      .delete(
+        `https://movio-app.herokuapp.com/users/${Username}/movies/${movie._id}`,
+
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        this.setState({ FavoriteMovies: response.data.FavoriteMovies });
+      })
+      .catch((error) => {
+        console.log('Deleting a movie from user list failed.', error);
+      });
+  };
+
   setFormUsername(value) {
     this.setState({
       FormUsername: value,
@@ -153,7 +168,7 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { FavoriteMovies, Username, Email } = this.state;
+    const { movies, Username, Email, FavoriteMovies } = this.state;
 
     return (
       <Container>
@@ -238,22 +253,30 @@ export class ProfileView extends React.Component {
               </Col>
             </Row>
             <Row>
-              {FavoriteMovies.map((ImagePath, Title, _id) => {
+              {FavoriteMovies.map((_id) => {
+                if (!movies) {
+                  return null;
+                }
+                const movie = movies.find((m) => m._id === _id);
                 return (
-                  <Col key={_id} className="fav-movie">
+                  <Col key={_id}>
                     <Figure>
-                      <Link to={`/movies/${movie._id}`}>
-                        <Figure.Image src={ImagePath} alt={Title} />
-                        <Figure.Caption>{Title}</Figure.Caption>
+                      <Link to={`/movies/${_id}`}>
+                        <Figure.Image
+                          width={200}
+                          src={movie.ImagePath}
+                          alt={movie.Title}
+                        />
+                        <Figure.Caption>{movie.Title}</Figure.Caption>
                       </Link>
+                      <Button
+                        className="my-2"
+                        variant="outline-danger"
+                        onClick={() => this.RemoveFavorite(movie)}
+                      >
+                        Delete from list
+                      </Button>
                     </Figure>
-                    <Button
-                      className="remove"
-                      variant="secondary"
-                      onClick={() => removeFav(movie._id)}
-                    >
-                      Remove from the list
-                    </Button>
                   </Col>
                 );
               })}

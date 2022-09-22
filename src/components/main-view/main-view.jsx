@@ -21,6 +21,7 @@ export class MainView extends React.Component {
     this.state = {
       movies: [],
       user: null,
+      favorites: [],
     };
   }
 
@@ -31,7 +32,26 @@ export class MainView extends React.Component {
         user: localStorage.getItem('user'),
       });
       this.getMovies(accessToken);
+      this.getUser(accessToken);
     }
+  }
+
+  getUser(token) {
+    const user = localStorage.getItem('user');
+    axios
+      .get(`https://movio-app.herokuapp.com/users`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        const findUser = response.data.find((u) => u.Username === user);
+        this.setState({
+          user: findUser.Username,
+          favorites: findUser.FavoriteMovies,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   getMovies(token) {
@@ -51,15 +71,51 @@ export class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log(authData);
     this.setState({
       user: authData.user.Username,
+      favorites: authData.user.FavoriteMovies,
     });
 
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
   }
+
+  //ADD MOVIE TO FAVORITE LIST
+  AddFavorite = (movie) => {
+    const Username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios
+      .post(
+        `https://movio-app.herokuapp.com/users/${Username}/movies/${movie._id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        this.setState({ favorites: response.data.FavoriteMovies });
+      })
+      .catch((error) => {
+        console.log('Adding a movie to user list failed.', error);
+      });
+  };
+
+  //DELETE MOVIE FROM FAVORITE LIST
+  RemoveFavorite = (movie) => {
+    const Username = localStorage.getItem('user');
+    const token = localStorage.getItem('token');
+    axios
+      .delete(
+        `https://movio-app.herokuapp.com/users/${Username}/movies/${movie._id}`,
+
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
+      .then((response) => {
+        this.setState({ favorites: response.data.FavoriteMovies });
+      })
+      .catch((error) => {
+        console.log('Deleting a movie from user list failed.', error);
+      });
+  };
 
   render() {
     const { movies, user } = this.state;
@@ -80,7 +136,12 @@ export class MainView extends React.Component {
               if (movies.length === 0) return <div className="main-view" />;
               return movies.map((m) => (
                 <Col md={3} key={m._id}>
-                  <MovieCard movie={m} />
+                  <MovieCard
+                    movie={m}
+                    onAddFavorite={() => this.AddFavorite(m)}
+                    onRemoveFavorite={() => this.RemoveFavorite(m)}
+                    favorite={this.state.favorites.includes(m._id)}
+                  />
                 </Col>
               ));
             }}

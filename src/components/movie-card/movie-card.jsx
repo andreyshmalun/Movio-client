@@ -1,34 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import './movie-card.scss';
 
 export class MovieCard extends React.Component {
-  // AddFavorite = (movie) => {
-  //   const Username = localStorage.getItem('user');
-  //   const token = localStorage.getItem('token');
-  //   console.log(this.props);
-  //   axios
-  //     .post(
-  //       `https://movio-app.herokuapp.com/users/${Username}/movies/${movie._id}`,
-  //       { headers: { Authorization: `Bearer ${token}` } }
-  //     )
-  //     .then((response) => {
-  //       const updatedUser = response.data;
-  //       console.log('Movie added to fav list');
-  //       localStorage.setItem('user', JSON.stringify(updatedUser));
-  //       window.location.reload();
-  //     })
-  //     .catch((error) => {
-  //       console.log('Adding a movie to user list failed.', error);
-  //     });
-  // };
-
   render() {
-    const { movie } = this.props;
+    const { movie, onAddFavorite, favorite, onRemoveFavorite } = this.props;
 
     return (
       <Card
@@ -60,13 +39,10 @@ export class MovieCard extends React.Component {
           </Link>
           <Button
             variant="outline-danger"
-            // onClick={() => this.AddFavorite(movie)}
-            data-toggle="tooltip"
-            data-placement="center"
-            title="Favourite a movie"
+            onClick={favorite ? onRemoveFavorite : onAddFavorite}
             className="pl-5"
           >
-            ♥
+            {favorite ? '✕' : '♡'}
           </Button>
         </Card.Body>
       </Card>
