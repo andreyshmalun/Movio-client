@@ -1,9 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+
+import { connect } from 'react-redux';
+
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
+import { setMovies } from '../../actions/actions';
+
+import MoviesList from '../movies-list/movies-list';
+
 import { LoginView } from '../login-view/login-view';
-import { MovieCard } from '../movie-card/movie-card';
+
 import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
@@ -14,12 +21,11 @@ import { ProfileView } from '../profile-view/profile-view';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export class MainView extends React.Component {
+class MainView extends React.Component {
   constructor() {
     super();
     // Initial state is set to null
     this.state = {
-      movies: [],
       user: null,
       favorites: [],
     };
@@ -60,10 +66,7 @@ export class MainView extends React.Component {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
+        this.props.setMovies(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -118,7 +121,8 @@ export class MainView extends React.Component {
   };
 
   render() {
-    const { movies, user } = this.state;
+    let { movies } = this.props;
+    let { user } = this.state;
     return (
       <Router>
         <Menubar user={user} />
@@ -134,16 +138,14 @@ export class MainView extends React.Component {
                   </Col>
                 );
               if (movies.length === 0) return <div className="main-view" />;
-              return movies.map((m) => (
-                <Col md={3} key={m._id}>
-                  <MovieCard
-                    movie={m}
-                    onAddFavorite={() => this.AddFavorite(m)}
-                    onRemoveFavorite={() => this.RemoveFavorite(m)}
-                    favorite={this.state.favorites.includes(m._id)}
-                  />
-                </Col>
-              ));
+              return (
+                <MoviesList
+                  movies={movies}
+                  // onAddFavorite={() => this.AddFavorite(movies)}
+                  // onRemoveFavorite={() => this.RemoveFavorite(movies)}
+                  // favorite={this.state.favorites.includes(movies._id)}
+                />
+              );
             }}
           />
           <Route
@@ -262,3 +264,9 @@ export class MainView extends React.Component {
     );
   }
 }
+
+let mapStateToProps = (state) => {
+  return { movies: state.movies };
+};
+
+export default connect(mapStateToProps, { setMovies })(MainView);
