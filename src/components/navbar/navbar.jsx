@@ -15,13 +15,7 @@ export const Menubar = ({ user }) => {
   };
 
   return (
-    <Navbar
-      className="rounded"
-      sticky="top"
-      bg="dark"
-      expand="lg"
-      variant="dark"
-    >
+    <Navbar className="navbar-dark bg-dark" sticky="top" expand="lg">
       <Container>
         <Navbar.Brand className="navbar-logo m-1" href="/">
           <h3>Movio</h3>

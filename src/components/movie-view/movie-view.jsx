@@ -20,8 +20,8 @@ export class MovieView extends React.Component {
 
     return (
       <Container>
-        <Row className="mt-2">
-          <Col>
+        <Row className="mt-4">
+          <Col style={{ textAlign: 'center' }}>
             <img
               style={{ height: '35vw' }}
               src={movie.ImagePath}

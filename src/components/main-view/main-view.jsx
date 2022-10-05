@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
-import { setMovies } from '../../actions/actions';
+import { setMovies, setUser } from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
 
@@ -54,6 +54,7 @@ class MainView extends React.Component {
           user: findUser.Username,
           favorites: findUser.FavoriteMovies,
         });
+        this.props.setUser(findUser);
       })
       .catch(function (error) {
         console.log(error);
@@ -82,43 +83,8 @@ class MainView extends React.Component {
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
+    this.getUser(authData.token);
   }
-
-  //ADD MOVIE TO FAVORITE LIST
-  AddFavorite = (movie) => {
-    const Username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-    axios
-      .post(
-        `https://movio-app.herokuapp.com/users/${Username}/movies/${movie._id}`,
-        {},
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-      .then((response) => {
-        this.setState({ favorites: response.data.FavoriteMovies });
-      })
-      .catch((error) => {
-        console.log('Adding a movie to user list failed.', error);
-      });
-  };
-
-  //DELETE MOVIE FROM FAVORITE LIST
-  RemoveFavorite = (movie) => {
-    const Username = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
-    axios
-      .delete(
-        `https://movio-app.herokuapp.com/users/${Username}/movies/${movie._id}`,
-
-        { headers: { Authorization: `Bearer ${token}` } }
-      )
-      .then((response) => {
-        this.setState({ favorites: response.data.FavoriteMovies });
-      })
-      .catch((error) => {
-        console.log('Deleting a movie from user list failed.', error);
-      });
-  };
 
   render() {
     let { movies } = this.props;
@@ -138,14 +104,7 @@ class MainView extends React.Component {
                   </Col>
                 );
               if (movies.length === 0) return <div className="main-view" />;
-              return (
-                <MoviesList
-                  movies={movies}
-                  // onAddFavorite={() => this.AddFavorite(movies)}
-                  // onRemoveFavorite={() => this.RemoveFavorite(movies)}
-                  // favorite={this.state.favorites.includes(movies._id)}
-                />
-              );
+              return <MoviesList movies={movies} />;
             }}
           />
           <Route
@@ -269,4 +228,4 @@ let mapStateToProps = (state) => {
   return { movies: state.movies };
 };
 
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);

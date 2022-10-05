@@ -11,6 +11,10 @@ function VisibilityFilterInput(props) {
       onChange={(e) => props.setFilter(e.target.value)}
       value={props.visibilityFilter}
       placeholder="filter"
+      style={{
+        marginLeft: '10px',
+        marginRight: '10px',
+      }}
     />
   );
 }

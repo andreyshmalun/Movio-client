@@ -17,7 +17,12 @@ class MovioApplication extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Container>
+        <Container
+          fluid
+          style={{
+            padding: '0px',
+          }}
+        >
           <MainView />
         </Container>
       </Provider>
