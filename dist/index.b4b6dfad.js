@@ -46666,7 +46666,7 @@ function RegistrationView(props) {
             Birthday: birthday
         }).then((response)=>{
             const data = response.data;
-            props.onRegister(data);
+            console.log(data);
             window.open("/", "_self");
         }).catch((e)=>{
             console.error("unable to register");
