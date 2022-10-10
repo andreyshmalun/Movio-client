@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
 import './navbar.scss';
 
 export const Menubar = ({ user }) => {
@@ -17,7 +18,7 @@ export const Menubar = ({ user }) => {
   return (
     <Navbar className="navbar-dark bg-dark" sticky="top" expand="lg">
       <Container>
-        <Navbar.Brand className="navbar-logo m-1" href="/">
+        <Navbar.Brand className="navbar-logo m-1" to="/" as={Link}>
           <h3>Movio</h3>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -29,7 +30,7 @@ export const Menubar = ({ user }) => {
             {getToken() ? (
               <>
                 {' '}
-                <Link className="nav-link m-1" to={`/users/${user}`}>
+                <Link className="nav-link m-1" to={`/users/${user.Username}`}>
                   Profile
                 </Link>
                 <p className="nav-link m-1" onClick={logOut}>

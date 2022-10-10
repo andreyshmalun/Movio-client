@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+
+import { connect } from 'react-redux';
+import { setMovies, setUser } from '../../actions/actions';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -10,12 +12,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import { Figure } from 'react-bootstrap';
-export class ProfileView extends React.Component {
+class ProfileView extends React.Component {
   constructor() {
     super();
     this.state = {
-      Username: null,
-      Password: null,
       FormEmail: null,
       FormUsername: null,
       FavoriteMovies: [],
@@ -23,9 +23,7 @@ export class ProfileView extends React.Component {
   }
 
   componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    this.getUser(accessToken);
-    this.getMovies(accessToken);
+    this.setState({ FavoriteMovies: this.props.user.FavoriteMovies });
   }
 
   onLoggedOut() {
@@ -35,44 +33,6 @@ export class ProfileView extends React.Component {
       user: null,
     });
     window.open('/', '_self');
-  }
-
-  getUser = (token) => {
-    const Username = localStorage.getItem('user');
-    axios
-      .get(`https://movio-app.herokuapp.com/users/`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        const user = response.data.find((user) => {
-          return user.Username === Username;
-        });
-        this.setState({
-          Username: user.Username,
-          Password: user.Password,
-          Email: user.Email,
-          FavoriteMovies: user.FavoriteMovies,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-
-  getMovies(token) {
-    axios
-      .get('https://movio-app.herokuapp.com/movies', {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   editUser = (e) => {
@@ -168,7 +128,9 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { movies, Username, Email, FavoriteMovies } = this.state;
+    const { movies } = this.props;
+    const { Username, Email } = this.props.user;
+    const { FavoriteMovies } = this.state;
 
     return (
       <Container>
@@ -254,10 +216,11 @@ export class ProfileView extends React.Component {
             </Row>
             <Row>
               {FavoriteMovies.map((_id) => {
-                if (!movies) {
+                const movie = movies?.find((m) => m._id === _id);
+                if (!movie) {
                   return null;
                 }
-                const movie = movies.find((m) => m._id === _id);
+
                 return (
                   <Col key={_id}>
                     <Figure>
@@ -287,3 +250,9 @@ export class ProfileView extends React.Component {
     );
   }
 }
+
+let mapStateToProps = (state) => {
+  return { movies: state.movies, user: state.user };
+};
+
+export default connect(mapStateToProps, { setMovies, setUser })(ProfileView);
