@@ -32,7 +32,7 @@ export function LoginView(props) {
     const isReq = validation();
     if (isReq) {
       axios
-        .post('https://movio-app.herokuapp.com/login', {
+        .post('https://movio.onrender.com/login', {
           Username: username,
           Password: password,
         })

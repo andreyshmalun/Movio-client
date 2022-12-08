@@ -37,7 +37,7 @@ class MainView extends React.Component {
   getUser(token) {
     const user = localStorage.getItem('user');
     axios
-      .get(`https://movio-app.herokuapp.com/users`, {
+      .get(`https://movio.onrender.com/users`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -51,7 +51,7 @@ class MainView extends React.Component {
 
   getMovies(token) {
     axios
-      .get('https://movio-app.herokuapp.com/movies', {
+      .get('https://movio.onrender.com/movies', {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

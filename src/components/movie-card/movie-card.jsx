@@ -15,7 +15,7 @@ class MovieCard extends React.Component {
     const token = localStorage.getItem('token');
     axios
       .post(
-        `https://movio-app.herokuapp.com/users/${Username}/movies/${movie._id}`,
+        `https://movio.onrender.com/users/${Username}/movies/${movie._id}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       )
@@ -33,7 +33,7 @@ class MovieCard extends React.Component {
     const token = localStorage.getItem('token');
     axios
       .delete(
-        `https://movio-app.herokuapp.com/users/${Username}/movies/${movie._id}`,
+        `https://movio.onrender.com/users/${Username}/movies/${movie._id}`,
 
         { headers: { Authorization: `Bearer ${token}` } }
       )

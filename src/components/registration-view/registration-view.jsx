@@ -43,7 +43,7 @@ export function RegistrationView(props) {
     const isReq = validate();
     if (isReq) {
       axios
-        .post('https://movio-app.herokuapp.com/users', {
+        .post('https://movio.onrender.com/users', {
           Username: username,
           Password: password,
           Email: email,

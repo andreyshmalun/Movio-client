@@ -40,7 +40,7 @@ class ProfileView extends React.Component {
     const token = localStorage.getItem('token');
     axios
       .put(
-        `https://movio-app.herokuapp.com/users/${Username}`,
+        `https://movio.onrender.com/users/${Username}`,
         {
           Username: this.state.FormUsername,
           Password: this.state.Password,
@@ -73,7 +73,7 @@ class ProfileView extends React.Component {
     const token = localStorage.getItem('token');
 
     axios
-      .delete(`https://movio-app.herokuapp.com/users/${Username}`, {
+      .delete(`https://movio.onrender.com/users/${Username}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
