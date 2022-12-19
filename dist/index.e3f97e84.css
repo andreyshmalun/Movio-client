@@ -1,0 +1,17 @@
+.movieDescription {
+  -webkit-line-clamp: 3;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+}
+
+.navbar-logo:first-letter {
+  color: #eb4747;
+}
+
+.movio {
+  color: #4682b4;
+}
+
+/*# sourceMappingURL=index.e3f97e84.css.map */

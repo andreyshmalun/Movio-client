@@ -36759,7 +36759,10 @@ function MoviesList(props) {
                 columnNumber: 7
             }, this),
             filteredMovies.map((m)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _colDefault.default), {
-                    md: 3,
+                    xs: 12,
+                    sm: 6,
+                    md: 4,
+                    lg: 3,
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCardDefault.default), {
                         movie: m
                     }, void 0, false, {
@@ -49667,7 +49670,7 @@ class ProfileView extends (0, _reactDefault.default).Component {
     RemoveFavorite = (movie)=>{
         const Username = localStorage.getItem("user");
         const token = localStorage.getItem("token");
-        (0, _axiosDefault.default).delete(`https://movio-app.herokuapp.com/users/${Username}/movies/${movie._id}`, {
+        (0, _axiosDefault.default).delete(`https://movio.onrender.com/users/${Username}/movies/${movie._id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
